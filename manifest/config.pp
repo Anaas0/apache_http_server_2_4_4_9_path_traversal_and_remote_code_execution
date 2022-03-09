@@ -2,6 +2,7 @@
 #
 #
 class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::config {
+  Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   # resources
   $user = 'websvr' #SecGen parameter.
   $user_home = "/home/${user}"
