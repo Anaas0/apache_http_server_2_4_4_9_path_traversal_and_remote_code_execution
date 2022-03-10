@@ -11,7 +11,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::servi
     source  => 'puppet:///modules/apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution/httpd.service',
     owner   => 'root',
     mode    => '0777', # Full permissions.
-    require => Exec['/usr/local/apache2/conf/httpd.conf'],
+    require => File['/usr/local/apache2/conf/httpd.conf'],
     notify  => Exec['start-httpd'],
   }
 

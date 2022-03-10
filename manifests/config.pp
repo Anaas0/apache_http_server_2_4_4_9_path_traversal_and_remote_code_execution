@@ -7,7 +7,6 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::confi
   $user = 'websvr' #SecGen parameter.
   $user_home = "/home/${user}"
 
-  Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   # Create user.
   user { $user:
     ensure     => 'present',
@@ -17,19 +16,18 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::confi
     password   => 'Password123',
     managehome => true,
     require    => Package['pcre2-utils'],
-    notify     => File['/opt/Apache_2.4.49/'],
+    notify     => File['/opt/Apache_2.4.49/httpd-2.4.49.tar.gz'],
   }
 
   # Remove current config
   exec { 'remove-config':
-  command => 'sudo rm -f /usr/local/apache2/conf/httpd.conf',
-  require => Exec['make-install'],
-  notify  => Exec['/usr/local/apache2/conf/httpd.conf'],
+    command => 'sudo rm -f /usr/local/apache2/conf/httpd.conf',
+    require => Exec['make-install'],
+    notify  => File['/usr/local/apache2/conf/httpd.conf'],
   }
 
   # Copy httpd.conf to /usr/local/apache2/conf/httpd.conf
-  exec { '/usr/local/apache2/conf/httpd.conf':
-    ensure  => 'present',
+  file { '/usr/local/apache2/conf/httpd.conf':
     mode    => '0755',
     owner   => $user,
     source  => 'puppet:///modules/apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution/httpd.conf',

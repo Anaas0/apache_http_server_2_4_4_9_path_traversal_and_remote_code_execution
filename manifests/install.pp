@@ -39,8 +39,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::insta
   }
 
   # Move tar ball to /opt/ directory
-  file { '/opt/Apache_2.4.49/':
-    ensure  => 'present',
+  file { '/opt/Apache_2.4.49/httpd-2.4.49.tar.gz':
     owner   => $user,
     mode    => '0755',
     source  => 'puppet:///modules/apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution/httpd-2.4.49.tar.gz',
@@ -50,11 +49,11 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::insta
 
   # Extract tar ball
   exec { 'mellow-file':
-    command => 'tar -zvxf httpd-2.4.49.tar.gz',
-    cwd     => '/opt/Apache_2.4.49/',
+    command => 'sudo tar -xzvf httpd-2.4.49.tar.gz',
+    cwd     => '/opt/',
     creates => '/opt/Apache_2.4.49/httpd-2.4.49/',
-    require => File['/opt/Apache_2.4.49/'],
-    notify  => Exec[''],
+    require => File['/opt/Apache_2.4.49/httpd-2.4.49.tar.gz'],
+    notify  => Exec['configure'],
   }
 
   # In /httpd-2.4.49/ run sudo ./configure
