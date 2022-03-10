@@ -46,7 +46,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::confi
     mode    => '0755',
     owner   => $user,
     source  => 'puppet:///modules/apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution/httpd.conf',
-    require => Exec['/usr/local/apache2/htdocs/index.html'],
+    require => File['/usr/local/apache2/htdocs/index.html'],
     notify  => File['/etc/systemd/system/httpd.service'],
   }
 }
