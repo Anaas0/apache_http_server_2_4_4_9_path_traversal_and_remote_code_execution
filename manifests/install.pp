@@ -58,7 +58,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::insta
   # Extract tar ball
   exec { 'mellow-file':
     command => 'sudo tar -xzvf httpd-2.4.49.tar.gz',
-    cwd     => '/opt/',
+    cwd     => '/opt/Apache_2.4.49/',
     creates => '/opt/Apache_2.4.49/httpd-2.4.49/',
     require => File['/opt/Apache_2.4.49/httpd-2.4.49.tar.gz'],
     notify  => Exec['configure'],
