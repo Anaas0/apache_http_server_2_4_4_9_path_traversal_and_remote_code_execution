@@ -1,3 +1,7 @@
+Tested on Debian GNU/Linux 11 (bullseye).
+STATUS: Fully working.
+
+
 Simple Puppet module to install and configure the vulnerable Apache 2.4.49 to help individuals practice their exploitation skills. 
 Additionally, this module will hopefully be implimented into SecGen (https://github.com/cliffe/SecGen).
 
