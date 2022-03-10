@@ -38,6 +38,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::insta
     notify  => User[$user],
   }
 
+  # Create install directory
   file { '/opt/Apache_2.4.49/':
     ensure  => 'directory',
     owner   => $user,
@@ -46,7 +47,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::insta
     notify  => File['/opt/Apache_2.4.49/httpd-2.4.49.tar.gz'],
   }
 
-  # Move tar ball to /opt/ directory
+  # Move tar ball to /opt/Apache_2.4.49/ directory
   file { '/opt/Apache_2.4.49/httpd-2.4.49.tar.gz':
     owner   => $user,
     mode    => '0755',
