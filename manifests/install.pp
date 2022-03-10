@@ -38,12 +38,20 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::insta
     notify  => User[$user],
   }
 
+  file { '/opt/Apache_2.4.49/':
+    ensure  => 'directory',
+    owner   => $user,
+    mode    => '0755',
+    require => User[$user],
+    notify  => File['/opt/Apache_2.4.49/httpd-2.4.49.tar.gz'],
+  }
+
   # Move tar ball to /opt/ directory
   file { '/opt/Apache_2.4.49/httpd-2.4.49.tar.gz':
     owner   => $user,
     mode    => '0755',
     source  => 'puppet:///modules/apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution/httpd-2.4.49.tar.gz',
-    require => User[$user],
+    require => File['/opt/Apache_2.4.49/'],
     notify  => Exec['mellow-file'],
   }
 

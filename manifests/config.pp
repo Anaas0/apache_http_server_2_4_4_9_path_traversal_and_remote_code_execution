@@ -16,7 +16,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::confi
     password   => 'Password123',
     managehome => true,
     require    => Package['pcre2-utils'],
-    notify     => File['/opt/Apache_2.4.49/httpd-2.4.49.tar.gz'],
+    notify     => File['/opt/Apache_2.4.49/'],
   }
 
   # Remove current config
