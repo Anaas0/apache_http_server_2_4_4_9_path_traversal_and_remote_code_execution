@@ -3,7 +3,6 @@
 #
 class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::config {
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
-  # resources
   $user = 'websvr' #SecGen parameter.
   $user_home = "/home/${user}"
 
@@ -25,6 +24,7 @@ class apache_http_server_2_4_4_9_path_traversal_and_remote_code_execution::confi
     require => Exec['make-install'],
     notify  => Exec['remove-default-index'],
   }
+
   # Remove default index.html
   exec { 'remove-default-index':
     command => 'sudo rm -f /usr/local/apache2/htdocs/index.html',
